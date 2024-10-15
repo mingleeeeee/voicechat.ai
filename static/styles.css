@@ -1,4 +1,3 @@
-/* styles.css */
 body, html {
     margin: 0;
     padding: 0;
@@ -36,7 +35,7 @@ body, html {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    position: relative;  /* Relative position for centering animations */
+    position: relative;
 }
 
 .message {
@@ -62,8 +61,8 @@ body, html {
 /* Chat input container */
 #chat-input-container {
     display: flex;
-    justify-content: center;  /* Center the items horizontally */
-    align-items: center;  /* Center items vertically */
+    justify-content: space-around;  /* Space buttons evenly */
+    align-items: center;
     padding: 10px;
     border-top: 1px solid #ddd;
 }
@@ -73,23 +72,15 @@ body, html {
     width: 60px;
     height: 60px;
     border: none;
-    border-radius: 50%;  /* Make it circular */
-    background-color: #e0e0e0;  /* Grey color */
-    font-size: 30px;  /* Icon size */
-    color: #333;  /* Darker icon color */
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    font-size: 30px;
+    color: #333;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Adjusted container positioning */
-#start-talking-button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;  /* Full width to ensure it's centered */
 }
 
 /* Hover and active state styling */
@@ -99,12 +90,12 @@ body, html {
 
 /* Recording state - changes to red */
 #start-talking-button.recording {
-    background-color: #ff4d4d;  /* Red color when recording */
-    color: #fff;  /* White color for icon */
+    background-color: #ff4d4d;
+    color: #fff;
 }
 
 /* Keyboard Button Styling */
-#keyboard-button {
+.icon-button {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -112,18 +103,66 @@ body, html {
     margin-left: 10px;
 }
 
-#keyboard-button:focus {
-    outline: none;
+#icon-button:hover {
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+/* Stop Audio Button Styling */
+#stop-audio-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#stop-audio-button:hover {
+    background-color: #ff0000;
+}
+
+#stop-audio-button:active {
+    background-color: #cc0000;
+}
+
+/* Hidden Input and Send Button Container */
+#hidden-input-container {
+    display: flex;
+    margin-top: 10px;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+#send-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#send-button:hover {
+    background-color: #45a049;
 }
 
 /* Centered Loading Animation */
 .message.loading {
     font-style: italic;
-    color: #999;  
-    background-color: transparent; 
-    font-weight: bold; 
-    font-size: 16px; 
-    align-self: center;  /* Center the message */
-    text-align: center;  /* Center the text */
-    width: 100%;  /* Full width to ensure it's centered */
+    color: #999;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 16px;
+    align-self: center;
+    text-align: center;
+    width: 100%;
 }

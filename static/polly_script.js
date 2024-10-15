@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Hide the text input and send button container by default
     hiddenInputContainer.style.display = 'none';
 
-    // Handle incoming message and audio data from the server
+    // Handle incoming message and audio data from the server (for Polly)
     socket.on("response_with_audio", data => {
         removeLoadingIndicator();
 
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (data.text) {
             appendMessage("user", data.text);
             showLoadingIndicator();
-            socket.emit("message", data.text);
+            socket.emit("message_polly", data.text);  // Use Polly-specific message route
         } else {
             appendMessage("user", "Unable to detect human voice.");
             console.error('Failed to convert speech to text:', data.error);
@@ -57,7 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
     keyboardButton.addEventListener("click", () => {
         const isVisible = hiddenInputContainer.style.display === 'flex';
         hiddenInputContainer.style.display = isVisible ? 'none' : 'flex';
-
         hiddenInputContainer.style.flexDirection = 'row';
 
         if (!isVisible) {
@@ -69,8 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const message = userInput.value.trim();
         if (message) {
             appendMessage("user", message);
-            socket.emit("message", message);
-            userInput.value = ""; // Clear the input field after sending
+            socket.emit("message_polly", message);  // Emit message via Polly-specific route
+            userInput.value = "";  // Clear the input field after sending
             showLoadingIndicator();
         }
     });
@@ -124,20 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 
-    // function appendMessage(sender, message) {
-    //     const messageElement = document.createElement("div");
-    //     messageElement.classList.add("message", sender.toLowerCase());
-
-    //     if (message === "Unable to detect human voice." && sender === "user") {
-    //         messageElement.style.backgroundColor = "#DCF8C6";
-    //         messageElement.style.color = "#333";
-    //         messageElement.style.alignSelf = "flex-end";
-    //     }
-    //     messageElement.textContent = message;
-    //     messagesDiv.appendChild(messageElement);
-    //     messagesDiv.scrollTop = messagesDiv.scrollHeight;
-    // }
-
     function appendMessage(sender, message) {
         const messageElement = document.createElement("div");
         messageElement.classList.add("message", sender.toLowerCase());
@@ -153,9 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     
         messagesDiv.appendChild(messageElement);
-        messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to bottom
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;  // Scroll to bottom
     }
-    
 
     function showLoadingIndicator() {
         if (!loadingMessageElement) {

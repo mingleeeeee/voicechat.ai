@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot Interface</title>
+    <title>Chatbot with Amazon Polly TTS</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div id="chatbot-container">
         <!-- Chat header -->
         <div id="chat-header">
-            <h2>Tokyobeast (OpenAI TTS)</h2>
-            <button onclick="window.location.href='polly'" class="navigation-button">
-                Switch to Amazon Polly TTS
+            <h2>Tokyobeast (Amazon Polly TTS)</h2>
+            <button onclick="window.location.href='/'" class="navigation-button">
+                Switch to OpenAI TTS
             </button>
         </div>
 
         <!-- Chat messages container -->
-        <div id="chat-messages" class="chat-box">
-            <!-- Chat bubbles will be dynamically added here -->
-        </div>
+        <div id="chat-messages" class="chat-box"></div>
 
         <!-- Chat input container -->
         <div id="chat-input-container">
@@ -33,8 +31,6 @@
             <button id="keyboard-button" class="icon-button" title="Show input box">⌨️</button>
         </div>
 
-        
-
         <!-- Hidden Text Input and Send Button Container -->
         <div id="hidden-input-container">
             <input type="text" id="chat-input" placeholder="Type your message here...">
@@ -42,10 +38,8 @@
         </div>
     </div>
 
-    
-
     <!-- Include Socket.IO and Client-Side JavaScript -->
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='polly_script.js') }}"></script>
 </body>
 </html>
